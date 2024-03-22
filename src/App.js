@@ -1,5 +1,7 @@
 import Header from './Header';
 import Content from './Content';
+import Footer from './Footer';
+import './App.css';
 function App() {
 
   function handleNameChange(){
@@ -8,9 +10,10 @@ function App() {
     return names(int);
   }
   return (
-    <div>
+    <div className="App">
       <Header />
       <Content />
+      <Footer />
     </div>
   );
 }

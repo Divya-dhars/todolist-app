@@ -5,8 +5,19 @@ const Content=()=>{
         const int=Math.floor(Math.random()*3);
         return names[int];
     }
+
+    const handleClick=(e)=>{
+      console.log(e.target.innerText)
+    }
+    
+    const handleClick2=(name)=>{
+      console.log(`Hi ${name}`)
+    }
    return (
-     <p>Let's {handleNameChange()}</p>
+    <main>
+        <p onDoubleClick={()=>handleClick2('Divya')}>Let's {handleNameChange()} Money</p>
+        <button onClick={(e)=> handleClick(e)}>Subscribe</button>
+    </main>
    )
  }
  
