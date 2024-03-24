@@ -24,6 +24,10 @@ const Content=()=>{
         const listItems=items.map((item) => item.id===id? {...item,checked:!item.checked}:item)
         setItems(listItems)
     }
+    const handleDelete=(id)=>{
+        const listItems=items.filter((item)=>item.id!==id)
+        setItems(listItems)
+    }
    return (
     <main>
         <ul>
@@ -31,7 +35,7 @@ const Content=()=>{
                 <li className="item" key={item.id}>
                     <input type="checkbox"  onChange={()=>handleCheck(item.id)} checked={item.checked}/>
                     <label>{item.item}</label>
-                   <FaTrashAlt role="button" tabIndex="0" />
+                   <FaTrashAlt role="button" onClick={()=>handleDelete(item.id)} tabIndex="0" />
                 </li>
             ))}
         </ul>
