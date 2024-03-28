@@ -42,8 +42,9 @@ main{
 footer{
   width:100%;
   color:black;
-  padding-top:900px;
-  display:grid;
+  position:fixed;
+  bottom: 14px;
+  left:0;
   place-content: center;
 }
 ul{
