@@ -1,19 +1,49 @@
 import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
+import {useState} from 'react';
 import './App.css';
 function App() {
 
-  function handleNameChange(){
-    const names=["Earn","Grow","Give"];
-    const int=Math.floor(Math.random()*3);
-    return names(int);
-  }
+  const [items,setItems]=useState([
+    {
+        id:1,
+        checked:true,
+        item:"Practice Coding"
+    },
+    {
+        id:2,
+        checked:false,
+        item:"Play Cricket"
+    },
+    {
+        id:3,
+        checked:true,
+        item:"Read About AI" 
+    }
+]);
+const handleCheck=(id)=>{
+    //console.log(`id ${id}`)
+    const listItems=items.map((item) => item.id===id? {...item,checked:!item.checked}:item)
+    setItems(listItems)
+    localStorage.setItem("todo_list",JSON.stringify(listItems))
+}
+const handleDelete=(id)=>{
+    const listItems=items.filter((item)=>item.id!==id)
+    setItems(listItems)
+    localStorage.setItem("todo_list",JSON.stringify(listItems))
+}
   return (
     <div className="App">
-      <Header />
-      <Content />
-      <Footer />
+      <Header title="To Do List"/>
+      <Content 
+        items={items}
+        handleCheck={handleCheck}
+        handleDelete={handleDelete}
+       />
+      <Footer
+      length={items.length}
+      />
     </div>
   );
 }
