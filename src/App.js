@@ -5,6 +5,7 @@ import AddItem from './AddItem';
 import SearchItem from './SearchItem';
 import {useState,useEffect} from 'react';
 import './App.css';
+import apiRequest from './apiRequest';
 function App() {
 const API_URL='http://localhost:3000/items';
 const [items,setItems]=useState([]);
@@ -35,14 +36,21 @@ useEffect(()=>{
   },2000)
 },[])
 
-const addItem=(item)=>{
+const addItem= async (item)=>{
   const id=items.length ? items[ items.length-1 ].id + 1 : 1;
   const addNewItem={id, checked:false,item};
   const listItems=[...items,addNewItem];//...items=>already existing
   setItems(listItems);
   //localStorage.setItem("todo_list",JSON.stringify(listItems));
-}
 
+const postOptions ={
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body: JSON.stringify(addNewItem)
+  }
+  const result= await apiRequest(API_URL,postOptions)
+  if(result) setFetchError(result)
+} 
 const handleCheck=(id)=>{
     //console.log(`id ${id}`)
     const listItems=items.map((item) => item.id===id? {...item,checked:!item.checked}:item)
